@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable, filter, tap } from 'rxjs';
-import { LoadingService } from './core/loading-service';
+import { LoadingStateService } from './core/loading-state.service';
 import { LoginResponse, OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
@@ -15,10 +15,10 @@ export class AppComponent {
   loginResponse$: Observable<LoginResponse>;
 
   constructor(
-    private loadingService: LoadingService,
+    private loadingStateService: LoadingStateService,
     private oidcSecurityService: OidcSecurityService
   ) {
-    this.isLoading$ = this.loadingService.state$;
+    this.isLoading$ = this.loadingStateService.state$;
 
     this.loginResponse$ = oidcSecurityService.checkAuth().pipe(
       filter((loginRespose) => !!loginRespose),

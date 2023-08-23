@@ -1,14 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="blog-input">
-    <button
-      type="submit"
-      class="submit-button"
-      mat-raised-button
-      color="primary"
-    >
-      Publish blog
-    </button>
-    <button mat-raised-button color="secondary">Reset</button>
     <mat-form-field appearance="fill">
       <mat-label>Title</mat-label>
       <input matInput formControlName="title" />
@@ -26,5 +17,14 @@
       <textarea matInput rows="20" formControlName="content"></textarea>
       <mat-error>Content should not be empty</mat-error>
     </mat-form-field>
+    <button
+      type="submit"
+      class="submit-button"
+      mat-raised-button
+      color="primary"
+    >
+      Publish blog
+    </button>
+    <button mat-raised-button color="secondary">Reset</button>
   </div>
 </form>
