@@ -1,30 +1,52 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div class="blog-input">
-    <mat-form-field appearance="fill">
-      <mat-label>Title</mat-label>
-      <input matInput formControlName="title" />
-      <mat-error>
-        <span *ngIf="form?.get('title')?.errors?.['required']"
-          >Title should not be empty</span
-        >
-        <span *ngIf="form?.controls?.['title']?.errors?.['pattern']"
-          >Not a valid Title</span
-        >
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Tell your story...</mat-label>
-      <textarea matInput rows="20" formControlName="content"></textarea>
-      <mat-error>Content should not be empty</mat-error>
-    </mat-form-field>
-    <button
-      type="submit"
-      class="submit-button"
-      mat-raised-button
-      color="primary"
-    >
-      Publish blog
-    </button>
-    <button mat-raised-button color="secondary">Reset</button>
-  </div>
-</form>
+<div class="blog-container" *ngIf="blogStateService.state$ | async as state">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="blog-input">
+      <div class="error-message" *ngIf="state.error" color="warn">
+        Oups, der Blog konnte nicht gespeichert werden. Bitte versuchen Sie es
+        später nochmals.
+      </div>
+      <button
+        type="submit"
+        [disabled]="!form.valid"
+        class="submit-button"
+        mat-raised-button
+        color="primary"
+      >
+        Publish blog
+      </button>
+      <button
+        mat-raised-button
+        color="secondary"
+        (click)="form.reset(); (false)"
+      >
+        Reset
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" />
+        <mat-error>
+          <span *ngIf="form?.get('title')?.errors?.['required']"
+            >Title should not be empty</span
+          >
+          <span *ngIf="form?.controls?.['title']?.errors?.['pattern']"
+            >Not a valid Title</span
+          >
+          <span *ngIf="form?.get('title')?.errors?.['custom']"
+            >Custom Validator</span
+          >
+          <span *ngIf="form?.get('title')?.errors?.['customAsync']"
+            >Custom Async Validator</span
+          >
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Tell your story...</mat-label>
+        <textarea matInput rows="20" formControlName="content"></textarea>
+        <mat-error>Content should not be empty</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+
+{{ valueChanges$ | async | json }}
+{{ blogStateService.state$ | async | json }}
