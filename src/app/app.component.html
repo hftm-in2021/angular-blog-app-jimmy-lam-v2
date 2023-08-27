@@ -2,5 +2,9 @@
 <ng-template #isLoading>
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </ng-template>
-<app-sidebar></app-sidebar>
-<router-outlet></router-outlet>
+<app-sidebar
+  (login)="login()"
+  (logoff)="logout()"
+  [loginResponse]="loginResponse$ | async"
+>
+</app-sidebar>

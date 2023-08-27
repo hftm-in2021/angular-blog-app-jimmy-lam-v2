@@ -3,7 +3,7 @@
 }
 
 .sidenav {
-  width: 200px;
+  display: none;
 }
 
 .sidenav .mat-toolbar {
@@ -14,4 +14,32 @@
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+#profileImage {
+  width: 2.1875rem;
+  height: 2.1875rem;
+  border-radius: 20px;
+  background: #0c2354;
+  font-size: 0.9rem;
+  color: #fff;
+  text-align: center;
+  line-height: 2.1875rem;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+#add-blog {
+  margin-right: 100px;
+}
+
+@media (max-width: 620px) {
+  .sidenav {
+    display: flex;
+    width: 200px;
+  }
 }
